@@ -91,16 +91,13 @@ export default function BookmarkEditor({}) {
     try {
       await writeBookmarks(bookmarks);
 
-      let title = file?.name || "document";
-      title = title.trim().split(" ").join("_"); // replace spaces with underscores
-      title = title.replace(/\.[^.]+$/, ""); // remove file extension
+      // let title = file?.name || "document";
+      // title = title.trim().split(" ").join("_"); // replace spaces with underscores
+      // title = title.replace(/\.[^.]+$/, ""); // remove file extension
 
       const blobUrl = await getDownloadUrl();
 
-      const link = document.createElement("a");
-      link.href = blobUrl;
-      link.download = `${title}_with_bookmarks.pdf`;
-      link.click();
+      window.open(blobUrl, "_blank");
     } catch (error) {
       console.error("Error saving file:", error);
     }

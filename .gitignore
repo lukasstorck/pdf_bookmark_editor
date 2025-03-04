@@ -1,6 +1,9 @@
 # generated bookmarks
 public/b
 
+# config for generating bookmarks
+config.json
+
 # Logs
 logs
 *.log

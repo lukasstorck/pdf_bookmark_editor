@@ -116,17 +116,25 @@ def map_printed_to_pdf_page(printed_page_number: int, letter_name: str):
     return pdf_page_number
 
 
-def generate_boomark_file(sections: list[tuple[str, str, int, int, str]], choir_name: str, output_path: pathlib.Path, voice: str = None):
+def generate_boomark_file(sections: list[tuple[str, str, int, int, str]], choir_name: str, output_path: pathlib.Path, voice_aliases: tuple[str, ...] = None):
     file_name = choir_name
-    if voice:
+    if voice_aliases:
+        voice = voice_aliases[0]
         file_name += f'_{voice}'
     file_name += '.json'
     file_name = output_path / file_name
 
     bookmarks = []
     for title, marker, page, measure, section_voice in sections:
-        if voice and voice not in section_voice:
-            continue
+        # check if target voice is present
+        if voice_aliases:
+            found_voice = False
+            for voice in voice_aliases:
+                if voice in section_voice:
+                    found_voice = True
+                    break
+            if not found_voice:
+                continue
 
         label = f'{marker} (S. {page}, T. {measure}) - {title}'
         bookmark = {'name': label, 'page': map_printed_to_pdf_page(page, marker)}
@@ -162,7 +170,7 @@ if __name__ == '__main__':
         'PCM': 12,
         'PC': 13,
     }
-    voices = {'Sopran', 'Alt', 'Tenor', 'Bass'}
+    voices = [('Sopran', 'Kinderchor', 'SAT'), ('Alt', 'SAT'), ('Tenor', 'SAT'), ('Bass', )]
 
     for choir_name, choir_id in choirs.items():
         soup = get_raw_data(
@@ -172,5 +180,5 @@ if __name__ == '__main__':
         sections = extract_section_data(soup)
 
         generate_boomark_file(sections, choir_name, output_path)
-        for voice in voices:
-            generate_boomark_file(sections, choir_name, output_path, voice)
+        for voice_aliases in voices:
+            generate_boomark_file(sections, choir_name, output_path, voice_aliases)

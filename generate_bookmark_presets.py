@@ -76,38 +76,38 @@ def map_printed_to_pdf_page(printed_page_number: int, letter_name: str):
         elif letter_name == 'C5':
             pdf_page_number = 212
     elif 224 <= printed_page_number <= 233:
-        pdf_page_number = printed_page_number - 10
+        pdf_page_number = printed_page_number - 11
     elif 243 <= printed_page_number <= 246:
-        pdf_page_number = printed_page_number - 18
+        pdf_page_number = printed_page_number - 20
     elif printed_page_number == 247:
         if letter_name == 'F5':
-            pdf_page_number = 229
+            pdf_page_number = 227
         elif letter_name == 'G5':
-            pdf_page_number = 230
+            pdf_page_number = 228
     elif 254 <= printed_page_number <= 257:
-        pdf_page_number = printed_page_number - 22
+        pdf_page_number = printed_page_number - 25
     elif printed_page_number == 258:
         if letter_name == 'H5':
-            pdf_page_number = 236
+            pdf_page_number = 233
         elif letter_name == 'I5':
-            pdf_page_number = 237
+            pdf_page_number = 234
     elif 268 <= printed_page_number <= 271:
-        pdf_page_number = printed_page_number - 30
+        pdf_page_number = printed_page_number - 33
     elif 278 <= printed_page_number <= 298:
-        pdf_page_number = printed_page_number - 36
+        pdf_page_number = printed_page_number - 39
     elif 308 <= printed_page_number <= 309:
-        pdf_page_number = printed_page_number - 44
+        pdf_page_number = printed_page_number - 48
     elif 319 <= printed_page_number <= 326:
-        pdf_page_number = printed_page_number - 52
+        pdf_page_number = printed_page_number - 57
     elif 332 <= printed_page_number <= 336:
-        pdf_page_number = printed_page_number - 56
+        pdf_page_number = printed_page_number - 62
     elif printed_page_number == 337:
         if letter_name == 'Q5':
-            pdf_page_number = 281
+            pdf_page_number = 275
         if letter_name == 'R5':
-            pdf_page_number = 282
+            pdf_page_number = 276
     elif 347 <= printed_page_number <= 797:
-        pdf_page_number = printed_page_number - 64
+        pdf_page_number = printed_page_number - 70
 
     if pdf_page_number == None:
         print(f'pdf page number not found for {printed_page_number=}')
